@@ -24,33 +24,31 @@ public class DessinerPers extends Application {
 		VBox root = new VBox();
 		Canvas canvas = new Canvas(300, 300);
 		gc = canvas.getGraphicsContext2D();
-		
+
 		root.getChildren().add(canvas);
-		
-		
+
+
 		root.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
-			if(event.isControlDown()) {
-				
-			}
-			if (event.isShiftDown()) {
-				for (int i = 0; i < arrayR.size(); i++) {
-					if (event.getX() >= arrayR.get(i).getX() && event.getX() <= arrayR.get(i).getX() + arrayR.get(i).getWidth()) {
-						if (event.getY() >= arrayR.get(i).getY() && event.getY() <= arrayR.get(i).getY() + arrayR.get(i).getWidth()) {
-							selection = arrayR.get(i);
-							gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-							arrayR.remove(selection);
-							repaint();
+
+				if (event.isShiftDown()) {
+					for (int i = 0; i < arrayR.size(); i++) {
+						if (event.getX() >= arrayR.get(i).getX() && event.getX() <= arrayR.get(i).getX() + arrayR.get(i).getWidth()) {
+							if (event.getY() >= arrayR.get(i).getY() && event.getY() <= arrayR.get(i).getY() + arrayR.get(i).getWidth()) {
+								selection = arrayR.get(i);
+								gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+								arrayR.remove(selection);
+								repaint();
+							}
 						}
 					}
+				} else {
+					arrayR.add(new Rectangle(event.getX() - 10, event.getY() - 10, 20, 20));
+					repaint();
 				}
-			} else {
-				arrayR.add(new Rectangle(event.getX() - 10, event.getY() - 10, 20, 20));
-				repaint();
-			}
-			
+
 			}
 
 		});
@@ -132,7 +130,7 @@ public class DessinerPers extends Application {
 			gc.fillRect(arrayR.get(a).getX(), arrayR.get(a).getY(), arrayR.get(a).getWidth(), arrayR.get(a).getHeight());
 			gc.setStroke(Color.BLACK);
 			gc.strokeRect(arrayR.get(a).getX(), arrayR.get(a).getY(), arrayR.get(a).getWidth(),//carré = position du pointeur de la souris) puis de les faire disparaître en cliquant 
-			arrayR.get(a).getHeight());
+					arrayR.get(a).getHeight());
 		}
 	}
 
