@@ -8,10 +8,15 @@ import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class ListeSimple extends Application {
 	Label label;
@@ -19,6 +24,19 @@ public class ListeSimple extends Application {
 	ListView<String> sousList = new ListView<String>();
 	
 
+	class MonRenduDeCellule extends ListCell<String> {
+	    public void updateItem(String item, boolean empty) {
+	      super.updateItem(item, empty);
+	      Canvas c = new Canvas(200, 20);
+	      GraphicsContext gc = c.getGraphicsContext2D();
+
+	      Image file = new Image("res/file.png");
+	      Image folder = new Image("res/folder.png");
+	      gc.drawImage(folder, 5, 5);
+	      setGraphic(c);
+	    }
+	}
+	
 	class MonSousListChangeListener implements ListChangeListener<String> {
 		public void onChanged(javafx.collections.ListChangeListener.Change<? extends String> c){
 			
@@ -26,7 +44,6 @@ public class ListeSimple extends Application {
 
 		}
 	}
-
 
 	class MonListChangeListener implements ListChangeListener<String> {
 		public void onChanged(javafx.collections.ListChangeListener.Change<? extends String> c){
@@ -41,6 +58,7 @@ public class ListeSimple extends Application {
 		}
 	}
 
+	
 	public void start(Stage stage) {
 		File path = new File("/usr/include/");
 		String[] filelist = path.list();
@@ -50,7 +68,16 @@ public class ListeSimple extends Application {
 
 		//sousList.getSelectionModel().getSelectedItems().addListener(new MonListChangeListener());
 
-
+		list.setCellFactory(new Callback<ListView<String>,
+		        ListCell<String>>() {
+		            @Override
+		            public ListCell<String> call(ListView<String> list) {
+		                return new MonRenduDeCellule();
+		            }
+		        }
+		);
+		
+		
 		HBox root = new HBox();
 		root.setAlignment(Pos.CENTER_LEFT);
 		root.setSpacing(10.0);
