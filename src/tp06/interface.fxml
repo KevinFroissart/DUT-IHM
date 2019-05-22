@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tp06.MonControleur">
+   <children>
+      <Label fx:id="monLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="114.0" prefWidth="634.0" text="0">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="plus" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#pressedButtonPlus" prefHeight="216.0" prefWidth="309.0" text="+">
+               <font>
+                  <Font size="47.0" />
+               </font>
+            </Button>
+            <Button fx:id="moins" contentDisplay="CENTER" mnemonicParsing="false" onAction="#pressedButtonMinus" prefHeight="288.0" prefWidth="304.0" text="-">
+               <font>
+                  <Font size="47.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
